@@ -20,8 +20,13 @@
 
     la      a0, .INPUT_STRING
     la      a4, NUMBER
+    li      s0, 0       # Positional counter
+    li      s1, 0       # Position of first basement
 
 loop:
+
+    addi    s0, s0, 1
+
     lb      t1, (a0)
     beqz    t1, end_loop
 
@@ -45,7 +50,16 @@ decrement:
     ld      t0, (a4)
     addi    t0, t0, -1
     sd      t0, (a4)
+
+    li      t1, 0
+    blt     t0, t1, store_first_basement
+
     j       iterate
+
+store_first_basement:
+    li      t0, 0
+    bgt     s1, t0, iterate
+    mv      s1, s0
 
 iterate:
     addi    a0, a0, 1
@@ -53,7 +67,9 @@ iterate:
 
 end_loop:
     ld      a0, (a4)
-    jal     num_print
+    jal     num_print   # Print part 1
+    mv      a0, s1
+    jal     num_print   # Print part 2
     j       exit
 
 num_print:
