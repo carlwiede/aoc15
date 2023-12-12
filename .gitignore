@@ -1,2 +1,6 @@
+# RISC-V etc.
 *.exe
 *.o
+
+# Haskell
+*.hi
