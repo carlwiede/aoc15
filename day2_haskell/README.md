@@ -1,3 +1,3 @@
 ### Day 2 - Haskell
 
-TODO: Solve
+ghc day2.hs && ./day2
